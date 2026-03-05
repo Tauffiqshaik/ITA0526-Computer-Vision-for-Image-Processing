@@ -1,0 +1,27 @@
+import cv2
+
+# Read original image
+image = cv2.imread("sample.jpeg")
+
+if image is None:
+    print("Error: Image not found!")
+else:
+    # Create a copy
+    watermarked = image.copy()
+
+    # Add text watermark
+    text = "tree"
+    font = cv2.FONT_HERSHEY_SIMPLEX
+
+    # Position (bottom-right corner)
+    position = (watermarked.shape[1] - 200, watermarked.shape[0] - 20)
+
+    cv2.putText(watermarked, text, position, font,
+                1, (0, 0, 255), 2, cv2.LINE_AA)
+
+    # Display result
+    cv2.imshow("Original Image", image)
+    cv2.imshow("Watermarked Image", watermarked)
+
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
