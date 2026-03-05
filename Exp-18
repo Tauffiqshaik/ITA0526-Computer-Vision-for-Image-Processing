@@ -1,0 +1,27 @@
+import cv2
+
+# Read the image
+image = cv2.imread("sample.jpeg")
+
+if image is None:
+    print("Error: Image not found!")
+else:
+    # Display original image
+    cv2.imshow("Original Image", image)
+
+    # Step 1: Crop a Region of Interest (ROI)
+    # Format: image[y1:y2, x1:x2]
+    roi = image[100:300, 150:350]
+
+    # Step 2: Copy the ROI
+    roi_copy = roi.copy()
+
+    # Step 3: Paste the ROI to another location
+    image[350:550, 400:600] = roi_copy
+
+    # Display results
+    cv2.imshow("Cropped ROI", roi)
+    cv2.imshow("Image after Pasting ROI", image)
+
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
