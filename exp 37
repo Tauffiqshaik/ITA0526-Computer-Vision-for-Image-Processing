@@ -1,0 +1,29 @@
+import cv2
+import numpy as np
+
+def foreground_subtraction():
+
+    # Read input image
+    img = cv2.imread("sample.jpeg")
+
+    # Convert image to HSV color space
+    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+
+    # Define color range for foreground (example: red color)
+    lower_color = np.array([0, 120, 70])
+    upper_color = np.array([10, 255, 255])
+
+    # Create mask for the selected color
+    mask = cv2.inRange(hsv, lower_color, upper_color)
+
+    # Remove the foreground color
+    result = cv2.bitwise_and(img, img, mask=cv2.bitwise_not(mask))
+
+    # Display images
+    cv2.imshow("Original Image", img)
+    cv2.imshow("Foreground Removed", result)
+
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+foreground_subtraction()
