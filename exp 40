@@ -1,0 +1,34 @@
+import cv2
+import pytesseract
+
+def extract_text_from_video():
+
+    # Load video
+    cap = cv2.VideoCapture("samplev.mp4")
+
+    while True:
+        ret, frame = cap.read()
+
+        if not ret:
+            break
+
+        # Convert frame to grayscale
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+        # Extract text using OCR
+        text = pytesseract.image_to_string(gray)
+
+        # Print detected text
+        print("Detected Text:")
+        print(text)
+
+        # Display frame
+        cv2.imshow("Video Frame", frame)
+
+        if cv2.waitKey(30) & 0xFF == ord('q'):
+            break
+
+    cap.release()
+    cv2.destroyAllWindows()
+
+extract_text_from_video()
