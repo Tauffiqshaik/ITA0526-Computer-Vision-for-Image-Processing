@@ -1,0 +1,33 @@
+import cv2
+import numpy as np
+
+def draw_circle():
+
+    # Get image size from user
+    height = int(input("Enter image height: "))
+    width = int(input("Enter image width: "))
+
+    # Create white image
+    img = np.ones((height, width, 3), dtype=np.uint8) * 255
+
+    # Define center of circle
+    center = (width//2, height//2)
+
+    # Define radius
+    radius = min(height, width)//4
+
+    # Define color (Red)
+    color = (0, 0, 255)
+
+    # Thickness
+    thickness = 3
+
+    # Draw circle
+    cv2.circle(img, center, radius, color, thickness)
+
+    # Display image
+    cv2.imshow("Circle Image", img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+draw_circle()
